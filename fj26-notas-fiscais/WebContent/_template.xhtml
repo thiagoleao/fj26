@@ -3,10 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:f="http://java.sun.com/jsf/core"
 	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:ui="http://java.sun.com/jsf/facelets">
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>Sistema de notas fiscais - UberDist</title>
 	<h:outputStylesheet library="css" name="style.css" />
+	<h:outputStylesheet library="css" name="menuStyle.css" />
+	<link rel="shortcut icon" href="icon.ico" />
 </h:head>
 <h:body>
 	<div id="cabecalho">
@@ -20,6 +23,22 @@
 		</h:form>
 	</div>
 	<div id="conteudo" >
+	<h:form rendered="#{not empty loginBean.usuario.login}">
+		<ul id="menu">
+			<li><a href="index.xhtml">Início</a></li>
+			<li>
+				<a>Cadastro</a>
+				<ul>
+					<li><a href="usuario.xhtml">Usuário</a></li>
+					<li><a href="produto.xhtml">Produto</a></li>
+				</ul>
+			</li>
+			<li><a href="#">Estoque</a></li>
+			<li><a href="#">Financeiro</a></li>
+			<li><a href="#">Relatórios</a></li>
+			<li><a href="#">Sobre</a></li>
+		</ul>
+		</h:form>
 		<ui:insert name="conteudo"/>
 	</div>
 	<div id="rodape">

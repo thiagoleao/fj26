@@ -12,8 +12,12 @@ public class Usuario {
 	private Long id;
 
 	private String login;
+	private String nome;
+	private String sobrenome;
 
 	private String senha;
+	
+	private String observacao;
 
 	public Long getId() {
 		return id;
@@ -36,7 +40,31 @@ public class Usuario {
 	}
 
 	public void setSenha(String senha) {
-		this.senha = senha;
+		this.senha = senha;;
+	}
+
+	public String getObservacao() {
+		return observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getSobrenome() {
+		return sobrenome;
+	}
+
+	public void setSobrenome(String sobrenome) {
+		this.sobrenome = sobrenome;
 	}
 
 }

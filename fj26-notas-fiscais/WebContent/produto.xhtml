@@ -13,8 +13,8 @@
 			<h:form>
 			
 				<h2>
-					<h:outputText value="Novo Produto" rendered="#{empty produtoBean.produto.id}"/>
-					<h:outputText value="Editar Produto" rendered="#{not empty produtoBean.produto.id}"/>
+					<h:outputText value="Novo Produto" rendered="#{empty produtoBean.produto.nome}"/>
+					<h:outputText value="Editar Produto" rendered="#{not empty produtoBean.produto.nome}"/>
 				</h2>
 		
 				<fieldset>
@@ -26,15 +26,19 @@
 					<h:inputTextarea id="descricao" value="#{produtoBean.produto.descricao}"/>
 					
 					<h:outputLabel value="Preço:" for="preco" />
-					<h:inputText id="preco" value="#{produtoBean.produto.preco}"/>
+					<h:inputText id="preco" value="#{produtoBean.produto.preco}">
+						<f:convertNumber pattern="#,##0.00" minFractionDigits="2"/>
+					</h:inputText>
 					
-					<h:commandButton value="Gravar" rendered="#{empty produtoBean.produto.id}" action="#{produtoBean.grava}">
+					<h:commandButton value="Gravar" rendered="#{empty produtoBean.produto.nome}" action="#{produtoBean.grava}"> 
 						<f:ajax execute="@form" render="@form"/>
 					</h:commandButton>
-					<h:commandButton value="Editar" rendered="#{not empty produtoBean.produto.id}" action="#{produtoBean.grava}"/>
-					<h:commandButton value="Cancelar" action="#{produtoBean.limpaFormulario}" rendered="#{not empty produtoBean.produto.id}">
-						<f:ajax render="@form"/>
-					</h:commandButton>
+					<h:panelGrid columns="2">
+						<h:commandButton value="Editar" rendered="#{not empty produtoBean.produto.nome}" action="#{produtoBean.grava}"/>
+						<h:commandButton value="Cancelar" action="#{produtoBean.limpaFormulario}" rendered="#{not empty produtoBean.produto.nome}">
+							<f:ajax render="@form"/>
+						</h:commandButton>
+					</h:panelGrid>
 				</fieldset>	
 				<h2>Listagem  de Produtos</h2>		
 				<h:dataTable value="#{produtoBean.produtos}" var="produto"
@@ -49,22 +53,24 @@
 				</h:column>
 				<h:column>
 					<f:facet name="header">Preço</f:facet>
-					#{produto.preco}
-					
+					<h:outputText id="precos" value="#{produto.preco}">
+						<f:convertNumber pattern="R$ #,##0.00" minFractionDigits="2"/>
+					</h:outputText>
 					
 				</h:column>
 				<h:column>
-					<h:commandLink value="Alterar">
+					<h:commandLink title="Editar">
+					<h:graphicImage url="/resources/imagens/editar.png" width="30"/>
 					<f:facet name="header">Ação</f:facet>
 						<f:setPropertyActionListener target="#{produtoBean.produto}"
 						 value="#{produto}"/>
 						 <f:ajax render="@form"/>
 					</h:commandLink>
-				</h:column>		 
-				<h:column>
+			
 					<f:facet name="header">Ação</f:facet>
 					<h:commandLink action="#{produtoBean.remove(produto)}"
-						value="Remover">
+						title="Excluir">
+						<h:graphicImage url="/resources/imagens/excluir.png" width="30"/>
 						<f:ajax render="@form"/>
 						</h:commandLink>
 				</h:column>

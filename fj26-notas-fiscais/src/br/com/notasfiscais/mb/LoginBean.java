@@ -3,6 +3,8 @@
  */
 package br.com.notasfiscais.mb;
 
+import java.security.NoSuchAlgorithmException;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -18,10 +20,10 @@ import br.com.caelum.notasfiscais.modelo.Usuario;
 public class LoginBean {
 	private Usuario usuario = new Usuario();
 
-	public String efetuarLogin(){
+	public String efetuarLogin() throws NoSuchAlgorithmException{
 		UsuarioDAO dao = new UsuarioDAO();
 		if(dao.existe(usuario)){
-			return "produto?faces-redirect=true";
+			return "index?faces-redirect=true";
 		}
 		return "login";
 		
